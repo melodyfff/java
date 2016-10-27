@@ -1,4 +1,4 @@
-package Serialize;
+package Serialize.demo1;
 
 import java.io.Serializable;
 
