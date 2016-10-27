@@ -7,7 +7,7 @@ public class SequenceListTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SequenceList a = new SequenceList<>();
+		SequenceList a = new SequenceList();
 		a.add(1);
 		a.add(2);
 		a.insert("s", 1);

@@ -123,7 +123,7 @@ public class LinkQueue <T>{
     }  
 	
 	public static void main(String[] args){
-		LinkQueue queue = new LinkQueue<>();
+		LinkQueue queue = new LinkQueue();
 		queue.add("test");
 		queue.add("test");
 		queue.add("test");
