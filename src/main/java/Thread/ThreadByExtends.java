@@ -6,11 +6,11 @@ package Thread;
  * @date 2016年9月22日 下午10:41:25
  * @version V1.0
  */
-class MyTread extends Thread {
+class MyTread1 extends Thread {
     private String str;
 
     // 构造函数
-    public MyTread(String str) {
+    public MyTread1(String str) {
         this.str = str;
     }
 
@@ -28,8 +28,8 @@ class MyTread extends Thread {
 
 public class ThreadByExtends {
     public static void main(String[] args) {
-        MyTread mT1 = new MyTread("A");
-        MyTread mT2 = new MyTread("B");
+        MyTread1 mT1 = new MyTread1("A");
+        MyTread1 mT2 = new MyTread1("B");
         System.out.println("当前线程："+Thread.currentThread().getName());
         mT1.start();
         mT2.start();
