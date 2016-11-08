@@ -32,8 +32,9 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         final int[] a = {116, 105, 120, 114,103};
+        System.out.println("befor sort"+Arrays.toString(a));
         bubbleSort(a);
-        System.out.println(Arrays.toString(a));
+        System.out.println("after sort"+Arrays.toString(a));
     }
 
     static void bubbleSort(int a[]) {
