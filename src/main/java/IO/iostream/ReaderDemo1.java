@@ -14,7 +14,8 @@ public class ReaderDemo1 {
         // 考虑到编码格式
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file), encoding);
         // 读取所有
-        BufferedReader bufferedReader = new BufferedReader(reader);
+        //BufferedReader bufferedReader = new BufferedReader(reader);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file),encoding));
         String lineTxt;
         while ((lineTxt = bufferedReader.readLine()) != null){
             stringBuffer.append(lineTxt+"\n");
