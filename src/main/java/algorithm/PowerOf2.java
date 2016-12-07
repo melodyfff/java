@@ -1,7 +1,7 @@
 package algorithm;
 
 /**
- * Description：
+ * Description：是否2的乘方
  * Created by ChenXin on 2016/11/15.
  */
 public class PowerOf2 {
