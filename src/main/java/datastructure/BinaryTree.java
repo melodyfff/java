@@ -1,8 +1,8 @@
 package datastructure;
 
 /**
- * description：二叉树
- * author: xin chen
+ * @description：二叉树
+ * @author xin chen
  * created by ChenXin on 2016/11/15.
  */
 public class BinaryTree {
@@ -19,14 +19,23 @@ public class BinaryTree {
      */
     BinaryTree right;
 
-    //实例化二叉树类
+    /**
+     * 实例化二叉树类
+     *
+     * @param data 数据
+     */
     public BinaryTree(int data) {
         this.data = data;
         left = null;
         right = null;
     }
 
-    //向二叉树中插入子节点
+    /**
+     * 向二叉树中插入子节点
+     *
+     * @param root 根节点
+     * @param data data
+     */
     public void insert(BinaryTree root, int data) {
         //二叉树的左节点都比根节点小
         if (data > root.data) {
