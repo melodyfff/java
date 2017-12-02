@@ -1,4 +1,4 @@
-package Serialize.demo1;
+package serialize.demo1;
 
 import java.io.FileInputStream;
 import java.io.IOException;

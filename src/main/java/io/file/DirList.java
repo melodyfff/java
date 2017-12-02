@@ -1,11 +1,11 @@
-package IO.file;
+package io.file;
 
 import java.io.File;
 import java.io.FilenameFilter;
 
 /**   
  * @Title: DirList.java 
- * @Package IO 
+ * @Package io
  * @Description:  实现目录列表器
  * @author xinchen
  * @date 2016年8月13日 下午3:02:08 

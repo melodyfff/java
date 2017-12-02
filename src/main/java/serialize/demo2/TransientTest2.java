@@ -1,17 +1,15 @@
-package Serialize.demo2;
+package serialize.demo2;
 
 import java.io.*;
 
 /**
- * Description：使用transient关键字不序列化某个变量
- *              注意读取的时候，读取数据的顺序一定要和存放数据的顺序保持一致
+ * Description：
  * Created by ChenXin on 2016/10/27.
  */
-public class TransientTest {
-
+public class TransientTest2 {
     public static void main(String[] args) {
 
-        User user = new User();
+        User2 user = new User2();
         user.setUsername("Alexia");
         user.setPasswd("123456");
 
@@ -31,9 +29,12 @@ public class TransientTest {
             e.printStackTrace();
         }
         try {
+            // 在反序列化之前改变username的值
+            User2.username = "jmwang";
+
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(
                     "D:/user.txt"));
-            user = (User) is.readObject(); // 从流中读取User的数据
+            user = (User2) is.readObject(); // 从流中读取User的数据
             is.close();
 
             System.out.println("\nread after Serializable: ");
@@ -50,10 +51,10 @@ public class TransientTest {
     }
 }
 
-class User implements Serializable {
+class User2 implements Serializable {
     private static final long serialVersionUID = 8294180014912103005L;
 
-    private String username;
+    public static String username;
     private transient String passwd;
 
     public String getUsername() {
@@ -71,5 +72,4 @@ class User implements Serializable {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
-
 }

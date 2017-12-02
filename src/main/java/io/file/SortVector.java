@@ -1,4 +1,4 @@
-package IO.file;
+package io.file;
 
 import java.util.Vector;
 

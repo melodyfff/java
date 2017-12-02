@@ -1,6 +1,4 @@
-package Serialize.demo1;
-
-import Serialize.demo1.Employee;
+package serialize.demo1;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

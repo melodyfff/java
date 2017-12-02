@@ -1,4 +1,4 @@
-package IO.iostream;/**   
+package io.iostream;/**
 * @Description: 
 * @author xinchen 2016年10月17日 下午10:36:42   
 */

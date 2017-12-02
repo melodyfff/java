@@ -1,4 +1,4 @@
-package IO.iostream;
+package io.iostream;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -94,7 +94,7 @@ public class IOStreamDemo {
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found:" + args[0]);
 		} catch (IOException e) {
-			System.out.println("IO Exception");
+			System.out.println("io Exception");
 		}
 	}
 }

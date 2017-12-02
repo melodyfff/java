@@ -1,4 +1,4 @@
-package Thread.demo1;
+package thread;
 
 /**
  * @Description:
