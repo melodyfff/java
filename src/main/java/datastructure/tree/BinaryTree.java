@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.tree;
 
 /**
  * @description：二叉树
