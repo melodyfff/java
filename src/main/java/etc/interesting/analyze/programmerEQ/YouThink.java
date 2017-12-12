@@ -1,4 +1,4 @@
-package Interesting.AnalyzeProgrammerEQ;
+package etc.interesting.analyze.programmerEQ;
 
 /**
  * What you think
