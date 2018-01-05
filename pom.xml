@@ -15,4 +15,54 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>18.0</version>
+            </dependency>
+
+            <!--日志相关-->
+            <!--slf4j 日志接口-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+            <!--logback 日志实现-->
+            <!--只引入 logback-classic 即可-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
