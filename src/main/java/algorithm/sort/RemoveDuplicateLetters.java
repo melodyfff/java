@@ -51,7 +51,15 @@ public class RemoveDuplicateLetters {
     }
 
     public static void main(String[] args) {
-        String result = removeDuplicateLetters("cabacdcbc");
+
+        long startTime = System.currentTimeMillis();
+        StringBuilder sb = new StringBuilder("cabacdcbcdasdllakspcokqwezpeow");
+        for (int i = 0; i < 1000000; i++) {
+            sb.append("z");
+        }
+        String result = removeDuplicateLetters(sb.toString());
+        long endTime = System.currentTimeMillis();
         System.out.println(result);
+        System.out.println("cost:"+(endTime-startTime)+"ms");
     }
 }
