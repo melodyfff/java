@@ -13,6 +13,7 @@ public class BusiA extends Thread{
     @Override
     public void run(){
 //        super.run();
+        System.out.println("lockMethod hashcode:"+lockMethod.hashCode());
         lockMethod.busiA();
     }
 }
