@@ -15,26 +15,33 @@ public class DirList {
 
 	public static void main(String[] args) {
 		try{
-			File path = new File(".");//获取根项目所有文件夹dir的名字    /	获取上级目录
+			//获取根项目所有文件夹dir的名字    /	获取上级目录
+			File path = new File(".");
 			String[] list;
 			System.out.println("args lenght:"+args.length);
 			if(args.length == 0){
 				list = path.list();
 			}else{
-				list = path.list(new DirFilter(args[0]));//此处内部类要改成静态，不然会报错
+				//此处内部类要改成静态，不然会报错
+				list = path.list(new DirFilter(args[0]));
 			}
 			for (int i = 0; i < list.length; i++) {
-				System.out.println(list[i]); //循环输出文件夹dir的名字
+				//循环输出文件夹dir的名字
+				System.out.println(list[i]);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	// 此处如果写成class DirFilter implements FilenameFilter{}
-	// 静态方法中直接调用动态内部类会报这样错误:
-	// No enclosing instance of type DirList is accessible.
-	// Must qualify the allocation with an enclosing i
+
+
+	/**
+	 * 	 此处如果写成class DirFilter implements FilenameFilter{}
+	 * 静态方法中直接调用动态内部类会报这样错误:
+	 * No enclosing instance of type DirList is accessible.
+	 * Must qualify the allocation with an enclosing i
+	 */
 	public static class DirFilter implements FilenameFilter{
 		String afn;
 		

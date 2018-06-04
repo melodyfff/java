@@ -25,11 +25,11 @@ public class ExternalizableTest implements Externalizable {
 
         ExternalizableTest et = new ExternalizableTest();
         ObjectOutput out = new ObjectOutputStream(new FileOutputStream(
-                new File("D:/test")));
+                new File("D:/lock")));
         out.writeObject(et);
 
         ObjectInput in = new ObjectInputStream(new FileInputStream(new File(
-                "D:/test")));
+                "D:/lock")));
         et = (ExternalizableTest) in.readObject();
         System.out.println(et.content);
 

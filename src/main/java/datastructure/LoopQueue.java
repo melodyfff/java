@@ -151,7 +151,7 @@ public class LoopQueue<T> {
 	public static void main(String[] args){
 		LoopQueue queue = new LoopQueue();
 		for(int i = 0;i < 10;i++){
-			queue.add("test");
+			queue.add("lock");
 			
 	
 			System.out.println("front位置"+queue.front);
