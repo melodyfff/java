@@ -1,5 +1,8 @@
 package socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,26 +15,30 @@ import java.net.SocketTimeoutException;
  * @author xinchen 2016年9月16日 下午4:50:44
  */
 public class GreetingServer extends Thread {
+	private final static Logger LOGGER = LoggerFactory.getLogger(GreetingServer.class);
+
 	private ServerSocket serverSocket;
 
 	public GreetingServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
-		serverSocket.setSoTimeout(10000);
+		serverSocket.setSoTimeout(100000);
 	}
 
+	@Override
 	public void run() {
 		while (true) {
 			try {
-				System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
+				LOGGER.info("Waiting for client on port " + serverSocket.getLocalPort() + "...");
 				Socket server = serverSocket.accept();
-				System.out.println("Just connected to " + server.getRemoteSocketAddress());
+				LOGGER.info("Just connected to " + server.getRemoteSocketAddress());
 				DataInputStream in = new DataInputStream(server.getInputStream());
-				System.out.println(in.readUTF());
+				LOGGER.info(in.readUTF());
 				DataOutputStream out = new DataOutputStream(server.getOutputStream());
 				out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress() + "\nGoodbye!");
-				server.close();
+//				in.close();
+//				server.close();
 			} catch (SocketTimeoutException s) {
-				System.out.println("Socket timed out!");
+				LOGGER.warn("Socket timed out!");
 				break;
 			} catch (IOException e) {
 				e.printStackTrace();
