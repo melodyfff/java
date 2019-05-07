@@ -1,5 +1,6 @@
 package com.xinchen.java.util;
 
+import java.io.Serializable;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -366,5 +367,58 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
         return Objects.equals(o1, o2);
     }
 
+
+    public static class SimpleImmutableEntry<K, V> implements Map.Entry<K, V>, Serializable {
+        private static final long serialVersionUID = 123L;
+
+        private final K key;
+        private final V value;
+
+        public SimpleImmutableEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public SimpleImmutableEntry(Entry<? extends K, ? extends V> entry) {
+            this.key = entry.getKey();
+            this.value = entry.getValue();
+        }
+
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
+
+        @Override
+        public V setValue(V value) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Map.Entry)) {
+                return false;
+            }
+            Entry<?, ?> e = (Entry<?, ?>) o;
+            return eq(key, e.getKey()) && eq(value, e.getValue());
+        }
+
+        @Override
+        public int hashCode() {
+            return (key == null ? 0 : key.hashCode()) ^
+                    (value == null ? 0 : value.hashCode());
+        }
+
+        @Override
+        public String toString() {
+            return key + "=" + value;
+        }
+    }
 
 }
