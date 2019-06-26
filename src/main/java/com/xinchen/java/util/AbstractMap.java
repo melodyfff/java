@@ -1,13 +1,14 @@
 package com.xinchen.java.util;
 
+import java.io.Serializable;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 
 /**
+ * AbstractMap 源码阅读与理解
  * @author Xin Chen (xinchenmelody@gmail.com)
  * @version 1.0
  * @date Created In 2019/5/2 18:13
@@ -363,7 +364,164 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
 
     private static boolean eq(Object o1, Object o2) {
-        return Objects.equals(o1, o2);
+        return o1 == null ? o2 == null : o1.equals(o2);
+    }
+
+
+    /**
+     * 简单的可变entry键值对例子 (线程不安全)
+     *
+     * entry的值能被{@link SimpleEntry#setValue(Object)} 替换
+     *
+     * 即 key 被 final 修饰
+     *
+     * @param <K> key 不可改动
+     * @param <V> value
+     */
+    public static class SimpleEntry<K,V> implements Map.Entry<K,V>, Serializable{
+
+        private final K key;
+        private V value;
+
+
+        /**
+         * 构造函数初始化
+         * @param key key
+         * @param value value
+         */
+        public SimpleEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+
+        /**
+         * 构造函数
+         * @param entry 从{@link com.xinchen.java.util.Map.Entry}中继承过去的entry
+         */
+        public SimpleEntry(Entry<?extends K,?extends V> entry){
+            this.key = entry.getKey();
+            this.value = entry.getValue();
+        }
+
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
+
+        /**
+         * 设置新的value,返回oldValue
+         * @param value 新的value
+         * @return oldValue
+         */
+        @Override
+        public V setValue(V value) {
+            V oldValue = this.value;
+            this.value = value;
+            return oldValue;
+        }
+
+
+        /**
+         * 覆盖equals()
+         * @param o object
+         * @return boolean
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Map.Entry)){
+                return false;
+            }
+            Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
+            // 判断 key 和value是否相等
+            return eq(key, e.getKey()) && eq(value, e.getValue());
+        }
+
+        @Override
+        public int hashCode() {
+            return (key == null ? 0 : key.hashCode() ^ (value == null ? 0 : value.hashCode()));
+        }
+
+        @Override
+        public String toString() {
+            return key + "=" + value;
+        }
+    }
+
+
+    /**
+     * 简单的不可变entry键值对例子 (线程安全)
+     *
+     * entry的值<b>不</b>能被{@link SimpleEntry#setValue(Object)} 替换
+     *
+     * @param <K> 被 final修饰
+     * @param <V> 被 final修饰
+     */
+    public static class SimpleImmutableEntry<K,V> implements Entry<K,V>,Serializable{
+
+        private final K key;
+        private final V value;
+
+        public SimpleImmutableEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public SimpleImmutableEntry(Entry<? extends K,? extends V> entry){
+            this.key = entry.getKey();
+            this.value = entry.getValue();
+        }
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
+
+        /**
+         * 线程安全，不能被修改value
+         * @param value value
+         * @return 不能被修改，抛出异常
+         */
+        @Override
+        public V setValue(V value) {
+            throw new UnsupportedOperationException();
+        }
+
+        /**
+         * 覆盖equals()
+         * @param o object
+         * @return boolean
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Map.Entry)){
+                return false;
+            }
+            Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
+            // 判断 key 和value是否相等
+            return eq(key, e.getKey()) && eq(value, e.getValue());
+        }
+
+        @Override
+        public int hashCode() {
+            return (key == null ? 0 : key.hashCode() ^ (value == null ? 0 : value.hashCode()));
+        }
+
+        @Override
+        public String toString() {
+            return key + "=" + value;
+        }
     }
 
 
