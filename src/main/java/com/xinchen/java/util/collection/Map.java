@@ -1,4 +1,4 @@
-package com.xinchen.java.util;
+package com.xinchen.java.util.collection;
 
 import java.util.Collection;
 import java.util.Comparator;

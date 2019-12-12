@@ -1,4 +1,4 @@
-package com.xinchen.java.util;
+package com.xinchen.java.util.collection;
 
 import java.io.Serializable;
 import java.util.AbstractCollection;
@@ -397,7 +397,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 
         /**
          * 构造函数
-         * @param entry 从{@link com.xinchen.java.util.Map.Entry}中继承过去的entry
+         * @param entry 从{@link Map.Entry}中继承过去的entry
          */
         public SimpleEntry(Entry<?extends K,?extends V> entry){
             this.key = entry.getKey();

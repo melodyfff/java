@@ -1,4 +1,4 @@
-package com.xinchen.java.util;
+package com.xinchen.java.util.concurrent;
 
 import java.util.concurrent.Semaphore;
 
