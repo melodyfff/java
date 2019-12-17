@@ -35,10 +35,10 @@ public class ThreadPoolExecutorHookExample {
         // ---------分割线----------
         System.out.println();
 
-        executor.submit(task1);
+        Future submit = executor.submit(task1);
         TimeUnit.SECONDS.sleep(1);
 
-        System.out.println(task1.call());
+        System.out.println(String.format("%s get result [%s]", Thread.currentThread().getName(),submit.get()));
 
 
         // 停止executor
