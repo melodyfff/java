@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
+ * 参考：
+ * Java和Docker限制的那些事儿 http://www.dockone.io/article/5932
+ *
+ * https://royvanrijn.com/blog/2018/05/java-and-docker-memory-limits/
+ *
  * @author xinchen
  * @version 1.0
  * @date 30/12/2019 11:58
