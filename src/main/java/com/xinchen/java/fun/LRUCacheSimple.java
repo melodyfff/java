@@ -23,6 +23,8 @@ public class LRUCacheSimple<K,V> extends LinkedHashMap<K,V>{
     private final int cacheSize;
 
     public LRUCacheSimple(int cacheSize) {
+        // accessOrder 必须设置为true
+        // false： 基于插入顺序     true：  基于访问顺序
         super((int) Math.ceil(cacheSize / hashLoadFactory) + 1, hashLoadFactory, true);
         this.cacheSize = cacheSize;
     }
@@ -39,6 +41,7 @@ public class LRUCacheSimple<K,V> extends LinkedHashMap<K,V>{
             lru.put(i,i);
             // 模拟一直有在使用
             lru.get(0);
+            lru.get(1);
         }
         System.out.println(lru.toString());
     }
