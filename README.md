@@ -1,2 +1,2 @@
-# java
-java study
+# Java
+Have fun in Java
