@@ -1,6 +1,10 @@
 package com.xinchen.java.socket.http;
 
+
+
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -11,6 +15,11 @@ import java.net.Socket;
  *
  *
  * <P>
+ *     请求消息:
+ *     1. GET / HTTP/1.1                        请求行
+ *     2. Host: localhost:8888                  请求头部
+ *     3.                                       空行
+ *     4. name=hello&age=1                      请求数据
  *
  *     响应消息:
  *     1. HTTP/1.1 200 OK                       状态行
@@ -43,22 +52,23 @@ public class SimpleServer extends Thread{
             try (Socket server = serverSocket.accept()){
                 // The method blocks until a connection is made
 
+                InputStream in = server.getInputStream();
+                byte[] buf = new byte[in.available()];
+                int read = in.read(buf);
+                String request = new String(buf);
+                System.out.println(request);
+
                 try (PrintWriter printWriter = new PrintWriter(server.getOutputStream(), true)){
                     // 状态行
                     printWriter.println("HTTP/1.1 200 OK");
                     // 消息报头
                     printWriter.println("Content-Type:text/html;charset=utf-8");
+                    printWriter.println("Connection:close");
                     // 空行
                     printWriter.println();
                     // 响应正文
                     printWriter.println("<html>");
-//                    try (BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()))){
-//                        String ok ;
-//                        while ((ok=in.readLine())!=null){
-//                            printWriter.println(ok+"</br>");
-//                        }
-//                    }
-
+                    printWriter.println(request);
                     printWriter.println("<b>Hello World!<b>");
                     printWriter.println("</html>");
                     printWriter.flush();
