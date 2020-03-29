@@ -171,8 +171,10 @@ public class Sort {
     private static int[] merge(int[] left, int[] right) {
         int[] result = new int[left.length + right.length];
         for (int index = 0, i = 0, j = 0; index < result.length; index++) {
+            // 如果左数组已经排序完毕，则直接移动右数组
             if (i>=left.length){
                 result[index] = right[j++];
+                // 如果右数组已经排序完毕，则直接移动左数组
             } else if (j>=right.length){
                 result[index] = left[i++];
             } else if (left[i]>right[j]){
