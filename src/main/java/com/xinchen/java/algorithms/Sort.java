@@ -3,9 +3,8 @@ package com.xinchen.java.algorithms;
 import java.util.Arrays;
 
 /**
- *
  * 常见排序算法
- *
+ * <p>
  * 参考： https://www.cnblogs.com/guoyaohua/p/8600214.html
  *
  * @author Xin Chen (xinchenmelody@gmail.com)
@@ -142,7 +141,7 @@ public class Sort {
         System.out.println("Start Merge Sort.");
         long start = System.currentTimeMillis();
 
-        arr = mergeOne(arr);
+        arr = mergeSort0(arr);
 
         System.out.println("Cost : " + (System.currentTimeMillis() - start) + " ms");
         if (display) {
@@ -150,7 +149,7 @@ public class Sort {
         }
     }
 
-    private static int[] mergeOne(int[] arr) {
+    private static int[] mergeSort0(int[] arr) {
         // 问题拆分至最小值1
         if (arr.length < 2) {
             return arr;
@@ -159,12 +158,13 @@ public class Sort {
         int mid = arr.length / 2;
         int[] left = Arrays.copyOfRange(arr, 0, mid);
         int[] right = Arrays.copyOfRange(arr, mid, arr.length);
-        return merge(mergeOne(left), mergeOne(right));
+        return merge(mergeSort0(left), mergeSort0(right));
     }
 
     /**
      * 合并结果
-     * @param left int[]
+     *
+     * @param left  int[]
      * @param right int[]
      * @return int[]
      */
@@ -172,18 +172,71 @@ public class Sort {
         int[] result = new int[left.length + right.length];
         for (int index = 0, i = 0, j = 0; index < result.length; index++) {
             // 如果左数组已经排序完毕，则直接移动右数组
-            if (i>=left.length){
+            if (i >= left.length) {
                 result[index] = right[j++];
                 // 如果右数组已经排序完毕，则直接移动左数组
-            } else if (j>=right.length){
+            } else if (j >= right.length) {
                 result[index] = left[i++];
-            } else if (left[i]>right[j]){
+            } else if (left[i] > right[j]) {
                 result[index] = right[j++];
             } else {
                 result[index] = left[i++];
             }
         }
         return result;
+    }
+
+    /**
+     * 快速排序 （分治）
+     *
+     * @param arr     int[]
+     * @param display 是否显示结果
+     */
+    public static void quickSort(int[] arr, boolean display) {
+        System.out.println("Start Quick Sort.");
+        long start = System.currentTimeMillis();
+
+        quickSort0(arr, 0, arr.length-1);
+
+        System.out.println("Cost : " + (System.currentTimeMillis() - start) + " ms");
+        if (display) {
+            display(arr);
+        }
+    }
+
+    private static void quickSort0(int[] arr, int left, int right) {
+        if (left < right) {
+            int tmp;
+            // 基准
+            int pivot = arr[left];
+            int i = left;
+            int j = right;
+            while (i < j) {
+                // 从右边开始寻找到比基准小的数
+                while (arr[j] >= pivot && i < j) {
+                    j--;
+                }
+                // 从左边开始寻找到比基准大的数
+                while (arr[i] <= pivot && i < j) {
+                    i++;
+                }
+
+                // 交换将大的值放基准右边，小的值放基准左边
+                if (i < j) {
+                    tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
+
+            // 将基准位置放到中间
+            arr[left] = arr[i];
+            arr[i] = pivot;
+
+            quickSort0(arr, left, i - 1);
+            quickSort0(arr, i + 1, right);
+        }
+
     }
 
 
@@ -210,5 +263,7 @@ public class Sort {
         shellSort(copy(seed), false);
 
         mergeSort(copy(seed), false);
+
+        quickSort(copy(seed),false);
     }
 }
