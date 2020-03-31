@@ -59,7 +59,22 @@ public class LambdaExample {
                 })
                 .apply(supplierDemo().get());
         System.out.println(finalRe);
+
+
+        int tran = transDemo()
+                // 以下为执行的顺序 1 ,2
+                .before((o) -> {
+                    System.out.println(">>>>>> 2");
+                    return (int) o * 10;
+                })
+                .before((o) -> {
+                    System.out.println(">>>>>> 1");
+                    return (int) o * 20;
+                })
+                .apply(supplierDemo().get());
+
     }
+
 
 
     static Supplier<Integer> supplierDemo() {
@@ -76,6 +91,24 @@ public class LambdaExample {
 
     static Function<Integer,Integer> functionDemo(){
         return (o) -> o;
+    }
+
+    static Trans<Integer,Integer> transDemo(){
+        return (o) -> o;
+    }
+
+
+    /**
+     * 按照函数式接口编程标准编写
+     * @param <T>
+     * @param <R>
+     */
+    interface Trans<T,R> {
+        R apply(T t);
+
+        default <V> Trans<V,R> before(Trans<?super V,?extends T> before){
+            return (V v) -> apply(before.apply(v));
+        }
     }
 
 }
