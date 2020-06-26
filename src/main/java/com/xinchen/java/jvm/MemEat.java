@@ -16,18 +16,20 @@ import java.util.List;
  */
 public class MemEat {
     // change size
-    static final int SIZE = 1 * 1024 * 1024;
+    static final int SIZE = 5 * 1024 * 1024;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
+        System.out.println(new RuntimeAdapt(Runtime.getRuntime()));
         List<byte[]> l = new ArrayList<>();
-        while (true){
+        while (true) {
             byte[] b = new byte[SIZE];
             l.add(b);
             System.out.println(new RuntimeAdapt(Runtime.getRuntime()));
         }
     }
 
-    static class RuntimeAdapt{
+    static class RuntimeAdapt {
         // 总内存
         private long totalMemory;
         // 最大内存
@@ -35,7 +37,7 @@ public class MemEat {
         // 空闲内存
         private long freeMemory;
 
-        public RuntimeAdapt(Runtime rt){
+        public RuntimeAdapt(Runtime rt) {
             totalMemory = rt.totalMemory();
             maxMemory = rt.maxMemory();
             freeMemory = rt.freeMemory();
@@ -44,9 +46,9 @@ public class MemEat {
         @Override
         public String toString() {
             return "RuntimeAdapt{" +
-                    "totalMemory=" + totalMemory +
-                    ", maxMemory=" + maxMemory +
-                    ", freeMemory=" + freeMemory +
+                    "totalMemory=" + totalMemory  / 1024.0 / 1024.0 + " M [" + totalMemory + "]" +
+                    ", maxMemory=" + maxMemory  / 1024.0 / 1024.0 + " M [" + maxMemory + "]" +
+                    ", freeMemory=" + freeMemory  / 1024.0 / 1024.0 + " M [" + freeMemory + "]" +
                     '}';
         }
     }
