@@ -8,6 +8,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ *
+ * <p>
+ * Thread class with support for triggering graceful and forcible shutdown. In graceful shutdown,
+ * a flag is set, which the thread should detect and try to exit gracefully from. In forcible
+ * shutdown, the thread is interrupted. These can be combined to give a thread a chance to exit
+ * gracefully, but then force it to exit if it takes too long.
+ * </p>
+ * <p>
+ * Implementations should override the {@link #execute} method and check {@link #getRunning} to
+ * determine whether they should try to gracefully exit.
+ * </p>
+ *
  * @author xinchen
  * @version 1.0
  * @date 14/07/2020 13:50
