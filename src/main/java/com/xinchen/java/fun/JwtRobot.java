@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -80,8 +81,32 @@ public class JwtRobot extends Frame {
         }
     }
 
+    static void actionRandom(){
+        // 将鼠标位移到中央
+        Point location = frame.getLocation();
+        // 鼠标偏移量 - 以左上角为原点 0,0
+        int offset = SIZE - 1 ;
+
+        int x;
+        int y;
+
+        for (;;){
+            x = location.x  + ThreadLocalRandom.current().nextInt(offset);
+            y = location.y + ThreadLocalRandom.current().nextInt(offset);
+            System.out.format("移动鼠标至位置： %d,%d\n",x,y);
+            robot.mouseMove(x,y);
+
+            System.out.println("按住鼠标左键.");
+            robot.mousePress(InputEvent.BUTTON1_MASK);
+
+            System.out.println("释放鼠标左键.");
+            robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        }
+    }
+
     public static void main(String[] args) {
         initFrame();
-        action();
+//        action();
+        actionRandom();
     }
 }
