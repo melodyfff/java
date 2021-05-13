@@ -1,9 +1,9 @@
 package com.xinchen.java.context.camel;
 
 /**
- *
+ * Lifecycle API for {@link Context}.
  */
-interface ContextLifecycle {
+public interface ContextLifecycle {
   void start();
   void stop();
 }
