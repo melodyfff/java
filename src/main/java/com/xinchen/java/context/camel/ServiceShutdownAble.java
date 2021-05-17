@@ -1,5 +1,7 @@
 package com.xinchen.java.context.camel;
 
+import com.xinchen.java.context.camel.support.BaseService;
+
 /**
  * 具有ShutDown能力的{@link Service}
  *
